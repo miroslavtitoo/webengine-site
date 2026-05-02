@@ -51,7 +51,7 @@ function initHeroScroll() {
     scrollTrigger: {
       trigger: hero,
       start: 'top top',
-      end: '+=180%',
+      end: '+=120%',
       scrub: 0.6,
       pin: true,
       pinSpacing: true,
@@ -59,13 +59,13 @@ function initHeroScroll() {
     }
   });
 
-  // Phase 1 — Expand (0 → 0.45)
+  // Phase 1 — Expand (0 → 0.5)
   tl.to(media, {
     width: '100vw',
     height: '100vh',
     borderRadius: 0,
     ease: 'power2.inOut',
-    duration: 0.45,
+    duration: 0.5,
   }, 0);
   tl.to('.hero__corner, .hero__tagline', {
     opacity: 0,
@@ -74,15 +74,15 @@ function initHeroScroll() {
     ease: 'power2.in',
   }, 0);
 
-  // Phase 2 — Hold full screen
-  tl.to(media, { duration: 0.30 }, 0.45);
+  // Phase 2 — Hold full screen (короткий)
+  tl.to(media, { duration: 0.15 }, 0.5);
 
-  // Phase 3 — Exit upward
+  // Phase 3 — Exit upward (заканчивается ровно в конце пина)
   tl.to(media, {
     yPercent: -100,
-    duration: 0.25,
+    duration: 0.35,
     ease: 'power2.in',
-  }, 0.75);
+  }, 0.65);
 }
 
 /* ---------- Появление statement ---------- */
