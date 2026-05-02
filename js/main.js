@@ -41,6 +41,22 @@ function runPreloader(onDone) {
   }
 }
 
+/* ---------- Smooth scroll (Lenis) ---------- */
+function initSmoothScroll() {
+  if (typeof Lenis === 'undefined') return null;
+  const lenis = new Lenis({
+    lerp: 0.1,            // плавность (меньше = вязче)
+    smoothWheel: true,
+    syncTouch: true,      // плавный скролл и на тач-устройствах
+    syncTouchLerp: 0.075, // вязкость для тача
+    touchInertiaMultiplier: 25,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  return lenis;
+}
+
 /* ---------- Hero: видео разворачивается на скролле ---------- */
 function initHeroScroll() {
   const hero = document.getElementById('hero');
@@ -51,21 +67,21 @@ function initHeroScroll() {
     scrollTrigger: {
       trigger: hero,
       start: 'top top',
-      end: '+=120%',
-      scrub: 0.6,
+      end: '+=100%',
+      scrub: 0.3,
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
     }
   });
 
-  // Phase 1 — Expand (0 → 0.5)
+  // Phase 1 — Expand (0 → 0.45)
   tl.to(media, {
     width: '100vw',
     height: '100vh',
     borderRadius: 0,
     ease: 'power2.inOut',
-    duration: 0.5,
+    duration: 0.45,
   }, 0);
   tl.to('.hero__corner, .hero__tagline', {
     opacity: 0,
@@ -75,14 +91,14 @@ function initHeroScroll() {
   }, 0);
 
   // Phase 2 — Hold full screen (короткий)
-  tl.to(media, { duration: 0.15 }, 0.5);
+  tl.to(media, { duration: 0.15 }, 0.45);
 
   // Phase 3 — Exit upward (заканчивается ровно в конце пина)
   tl.to(media, {
     yPercent: -100,
-    duration: 0.35,
+    duration: 0.4,
     ease: 'power2.in',
-  }, 0.65);
+  }, 0.6);
 }
 
 /* ---------- Появление statement ---------- */
@@ -130,8 +146,9 @@ function initCasesReveal() {
 
 /* ---------- Запуск ---------- */
 runPreloader(() => {
-  // ScrollTrigger инициализируем после прелоадера, чтобы он
-  // считал «нормальное» состояние стартовым
+  // Smooth scroll стартуем после прелоадера, чтобы Lenis
+  // не пытался скроллить заблокированный body
+  initSmoothScroll();
   initHeroScroll();
   initStatementReveal();
   initCasesReveal();

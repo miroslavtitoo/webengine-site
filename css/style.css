@@ -155,12 +155,12 @@ body.is-loading .hero__tagline {
 /* ====================== HERO ====================== */
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
+  height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--header-h) var(--pad) 6rem;
+  padding: 0;
   background: var(--bg);
   overflow: hidden;
 }
@@ -245,7 +245,7 @@ body.is-loading .hero__tagline {
 /* Подвал hero */
 .hero__tagline {
   position: absolute;
-  bottom: 1.75rem;
+  bottom: 2.25rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
