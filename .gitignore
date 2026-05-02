@@ -1,0 +1,21 @@
+# Reference materials (not deployed)
+_ref/
+
+# Local server logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Claude tooling
+.claude/
+
+# Temp video files (until real showreel ready)
+assets/video/showreel.mp4
