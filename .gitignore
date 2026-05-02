@@ -17,5 +17,3 @@ desktop.ini
 # Claude tooling
 .claude/
 
-# Temp video files (until real showreel ready)
-assets/video/showreel.mp4
